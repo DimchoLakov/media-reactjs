@@ -1,5 +1,29 @@
 {
-  "users": [],
-  "albums": [],
+  "users": [
+    {
+      "name": "Brandy Stehr",
+      "id": 1
+    },
+    {
+      "name": "June Brakus",
+      "id": 2
+    },
+    {
+      "name": "Cora Bergstrom",
+      "id": 3
+    }
+  ],
+  "albums": [
+    {
+      "userId": 1,
+      "title": "Incredible Plastic Hat",
+      "id": 25
+    },
+    {
+      "userId": 2,
+      "title": "Gorgeous Fresh Fish",
+      "id": 27
+    }
+  ],
   "photos": []
 }
