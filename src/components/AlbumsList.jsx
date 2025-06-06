@@ -1,7 +1,7 @@
-function AlbumsList() {
+function AlbumsList({ user }) {
   return (
     <>
-      <div>AlbumsList</div>
+      <div>Albums for - {user.name}</div>
     </>
   );
 }
