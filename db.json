@@ -11,6 +11,10 @@
     {
       "name": "Cora Bergstrom",
       "id": 3
+    },
+    {
+      "name": "Catherine Gutmann",
+      "id": 4
     }
   ],
   "albums": [
@@ -23,7 +27,28 @@
       "userId": 2,
       "title": "Gorgeous Fresh Fish",
       "id": 27
+    },
+    {
+      "userId": 1,
+      "title": "Handcrafted Granite Salad",
+      "id": 28
     }
   ],
-  "photos": []
+  "photos": [
+    {
+      "albumId": 25,
+      "url": "https://loremflickr.com/150/150/abstract?lock=44726",
+      "id": 1
+    },
+    {
+      "albumId": 25,
+      "url": "https://loremflickr.com/150/150/abstract?lock=22015",
+      "id": 2
+    },
+    {
+      "albumId": 27,
+      "url": "https://loremflickr.com/150/150/abstract?lock=89739",
+      "id": 3
+    }
+  ]
 }
