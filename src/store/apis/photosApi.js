@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 // Development only!!!
 const pause = (duration) => {
     return new Promise((resolve) => {
-        setTimeout(resolve, duration); // ✅ correctly resolves after delay
+        setTimeout(resolve, duration);
     });
 };
 
@@ -18,28 +18,23 @@ const photosApi = createApi({
         //     return fetch(...args);
         // }
     }),
+    tagTypes: ["AlbumPhotos"],
     endpoints(builder) {
         return {
             removePhoto: builder.mutation({
-                invalidatesTags: (result, error, album) => {
-                    return [{ type: "Album", id: album.id }];
-
-                    // return [{ type: "Album", id: album.userId }];
-                    // Fine-grained approach in order to fetch data only for given ids
+                invalidatesTags: (result, error, photo) => {
+                    return [{ type: "AlbumPhotos", id: photo.albumId }];
                 },
                 query: (photo) => {
                     return {
                         url: `/photos/${photo.id}`,
                         method: "DELETE"
-                    }
+                    };
                 }
             }),
             addPhoto: builder.mutation({
-                invalidatesTags: (result, error, user) => {
-                    return [{ type: "UsersAlbums", id: user.id }];
-
-                    // return [{ type: "Album", id: user.id }];
-                    // Fine-grained approach in order to fetch data only for given ids
+                invalidatesTags: (result, error, album) => {
+                    return [{ type: "AlbumPhotos", id: album.id }];
                 },
                 query: (album) => {
                     return {
@@ -49,20 +44,12 @@ const photosApi = createApi({
                             albumId: album.id,
                             url: faker.image.abstract(150, 150, true)
                         }
-                    }
+                    };
                 }
             }),
             fetchPhotos: builder.query({
-                providesTags: (result, error, user) => {
-                    const tags = result.map(album => {
-                        return { type: "Album", id: album.id }
-                    })
-
-                    tags.push({ type: "UsersAlbums", id: user.id });
-
-                    return tags;
-                    // return [{ type: "Album", id: user.id }];
-                    // Fine-grained approach in order to fetch data only for given ids
+                providesTags: (result, error, album) => {
+                    return [{ type: "AlbumPhotos", id: album.id }];
                 },
                 query: (album) => {
                     return {
@@ -71,17 +58,18 @@ const photosApi = createApi({
                             albumId: album.id
                         },
                         method: "GET"
-                    }
+                    };
                 }
             })
-        }
+        };
     }
 });
 
+// names are automatically generated based on the endpoint function name and the type (query or mutation).
 export const {
     useFetchPhotosQuery,
     useAddPhotoMutation,
     useRemovePhotoMutation
-} = photosApi; // names are automatically generated
+} = photosApi;
 
 export { photosApi };
